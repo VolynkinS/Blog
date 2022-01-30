@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+{% block title %} {{ title }} {% endblock %}
+
+{% block sidebar %} {% include 'inc/_sidebar.html' %} {% endblock %}
+
+{% block content %}
+<div class="card mb-3">
+    <div class="card-header">
+        Категория: <a href="{{ project.category.get_absolute_url }}">{{ project.category }}</a>
+    </div>
+    <div class="card-body">
+        <div class="media">
+            {% if project.image %}
+            <img src="{{ project.image.url }}" alt="" width="350" class="rounded mx-auto d-block">
+            {% else %}
+            <img src="https://picsum.photos/id/1060/350/235/?blur=2" alt="" class="rounded mx-auto d-block">
+            {% endif %}
+            <div class="media-body">
+                <h5 class="card-title text-center mt-3">{{ project.title }}</h5>
+                {% autoescape off %}
+                <p class="card-text">{{ project.description|linebreaks }}</p>
+                {% endautoescape %}
+                <h5><a href="{{ project.url }}">{{ project.url }}</a></h5>
+            </div>
+        </div>
+    </div>
+    <div class="card-footer text-muted">
+        {{ project.created_at|date:"Y-m-d H:i:s" }}
+    </div>
+</div>
+{% endblock %}

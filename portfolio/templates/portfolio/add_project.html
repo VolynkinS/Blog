@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+
+{% block title %}Добавление проекта{% endblock %}
+
+{% block sidebar %} {% include 'inc/_sidebar.html' %} {% endblock %}
+
+{% block content %}
+
+<h1>Добавление новости</h1>
+
+<form action="{% url 'portfolio:add_project' %}" method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+
+    {{ form.as_p }}
+
+    <button type="submit" class="btn btn-primary btn-block">Добавить новость</button>
+</form>
+
+{% endblock %}
