@@ -7,14 +7,14 @@
 
 {% block content %}
 
-<h1>Добавление новости</h1>
+<h1>Добавление проекта</h1>
 
 <form action="{% url 'portfolio:add_project' %}" method="post" enctype="multipart/form-data">
     {% csrf_token %}
 
     {{ form.as_p }}
 
-    <button type="submit" class="btn btn-primary btn-block">Добавить новость</button>
+    <button type="submit" class="btn btn-primary btn-block">Добавить проект</button>
 </form>
 
 {% endblock %}

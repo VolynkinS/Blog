@@ -1,10 +1,10 @@
 from django.shortcuts import render, redirect
-from django.core.paginator import Paginator
 from django.views.generic import ListView, DetailView, CreateView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib import messages
-from django.contrib.auth import login, logout
+from django.contrib.auth import login, logout, authenticate
 from django.core.mail import send_mail
+from django.contrib.auth.decorators import login_required
 
 from .models import Projects, Category
 from .forms import ProjectForm, UserRegisterForm, UserLoginForm, ContactForm
@@ -12,44 +12,42 @@ from .forms import ProjectForm, UserRegisterForm, UserLoginForm, ContactForm
 
 class HomeProjects(ListView):
     model = Projects
-    template_name = 'portfolio/home.html'
+    # template_name = 'portfolio/projects_list.html'
     context_object_name = 'projects'
     paginate_by = 3
 
-    def get_context_data(self, *, object_list=None, **kwargs):
+    def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['title'] = "Alexander's Portfolio"
         return context
 
     def get_queryset(self):
-        return Projects.objects.filter(is_published=True).select_related('category')
+        return Projects.objects.filter(is_published=True).select_related(
+            'category')
 
 
 class CategoryProjects(ListView):
     model = Projects
-    template_name = 'portfolio/home.html'
+    # template_name = 'portfolio/projects_list.html'
     context_object_name = 'projects'
     allow_empty = False
     paginate_by = 3
 
-    def get_context_data(self, *, object_list=None, **kwargs):
+    def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['title'] = Category.objects.get(pk=self.kwargs['category_id'])
         return context
 
     def get_queryset(self):
-        return Projects.objects.filter(category_id=self.kwargs['category_id'], is_published=True).select_related('category')
+        return Projects.objects.filter(category_id=self.kwargs['category_id'],
+                                       is_published=True).select_related(
+            'category')
 
 
 class ViewProject(DetailView):
     model = Projects
-    template_name = 'portfolio/view_project.html'
+    # template_name = 'portfolio/projects_detail.html'
     context_object_name = 'project'
-
-    def get_context_data(self, *, object_list=None, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context['title'] = Projects.objects.get(pk=self.kwargs['pk'])
-        return context
 
 
 class CreateProject(LoginRequiredMixin, CreateView):
@@ -77,14 +75,16 @@ def user_login(request):
     if request.method == 'POST':
         form = UserLoginForm(data=request.POST)
         if form.is_valid():
-            user = form.get_user()
-            login(request, user)
-            return redirect('portfolio:home')
+            user = authenticate(request, **request.POST)
+            if user is not None:
+                login(request, user)
+                return redirect('portfolio:home')
     else:
         form = UserLoginForm
     return render(request, 'portfolio/user_login.html', {'form': form})
 
 
+@login_required
 def user_logout(request):
     logout(request)
     return redirect('portfolio:user_login')
@@ -94,7 +94,9 @@ def contact(request):
     if request.method == 'POST':
         form = ContactForm(request.POST)
         if form.is_valid():
-            mail = send_mail(form.cleaned_data['subject'], form.cleaned_data['content'], 'django_smtp_mail@mail.ru', ['sv88800@mail.ru'],
+            mail = send_mail(form.cleaned_data['subject'],
+                             form.cleaned_data['content'],
+                             'django_smtp_mail@mail.ru', ['sv88800@mail.ru'],
                              fail_silently=False)
             if mail:
                 messages.success(request, 'Письмо отправлено!')
@@ -106,7 +108,6 @@ def contact(request):
     else:
         form = ContactForm()
     return render(request, 'portfolio/test.html', {'form': form})
-
 
 # def add_project(request):
 #     if request.method == 'POST':

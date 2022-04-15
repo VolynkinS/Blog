@@ -12,7 +12,7 @@
     <link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap.min.css' %}">
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
 
-    <title>{% block title %}{% endblock %}</title>
+    <title>{% block title %}Alexander's Portfolio{% endblock %}</title>
 </head>
 <body>
 
@@ -59,7 +59,7 @@
                             {% if p == page_obj.number %}
                                 <li class="page-item active"
                                     aria-current="page"><a class="page-link" href="?page={{ p }}">{{ p }}</a></li>
-                            {% elif page_obj.number|add:-3 < p and p < page_obj.number|add:3 %}
+                            {% elif page_obj.number|add:-3 < p and p < page_ob.number|add:3 %}
                                 <li class="page-item"><a class="page-link" href="?page={{ p }}">{{ p }}</a></li>
                             {% endif %}
                         {% endfor %}

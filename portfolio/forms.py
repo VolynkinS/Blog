@@ -26,6 +26,7 @@ class UserRegisterForm(UserCreationForm):
         username = self.cleaned_data['username']
         if re.match(r'\d', username):
             raise ValidationError('Имя пользователя не должно начинаться с цифры.')
+        return username
 
 
 class ProjectForm(forms.ModelForm):
