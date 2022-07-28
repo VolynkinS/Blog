@@ -84,8 +84,8 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': 'db',
-        'USER': 'Aleksandr',
-        'PASSWORD': 'Sasha-555',
+        'USER': '******',
+        'PASSWORD': '******',
         'HOST': '127.0.0.1',
         'PORT': '5432'
     }
@@ -149,8 +149,8 @@ INTERNAL_IPS = [
 
 EMAIL_HOST = 'smtp.mail.ru'
 EMAIL_PORT = 2525
-EMAIL_HOST_USER = 'django_smtp_mail@mail.ru'
-EMAIL_HOST_PASSWORD = 'nx8VUa5L6cuDjKH12kzz'
+EMAIL_HOST_USER = '******'
+EMAIL_HOST_PASSWORD = '******'
 EMAIL_USE_TLS = True
 EMAIL_USE_SSL = False
 
