@@ -151,8 +151,13 @@ INTERNAL_IPS = [
 
 EMAIL_HOST = 'smtp.mail.ru'
 EMAIL_PORT = 2525
+<<<<<<< HEAD
 EMAIL_HOST_USER = '*******'
 EMAIL_HOST_PASSWORD = '*******'
+=======
+EMAIL_HOST_USER = '******'
+EMAIL_HOST_PASSWORD = '******'
+>>>>>>> 3720d481ed4f43cd5b028e18bf5d6683def29dc9
 EMAIL_USE_TLS = True
 EMAIL_USE_SSL = False
 
