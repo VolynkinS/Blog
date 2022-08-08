@@ -1,0 +1,19 @@
+services:
+  db:
+    image: postgres
+    restart: always
+    env_file:
+      - ./env/docker.env
+    volumes:
+      - kpi_postgres:/var/lib/postgresql/data
+    ports:
+      - "5423:5432"
+  redis:
+    image: redis
+    restart: always
+    volumes:
+      - kpi_redis:/data
+
+volumes:
+  kpi_postgres:
+  kpi_redis:

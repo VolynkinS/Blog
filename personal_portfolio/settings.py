@@ -86,10 +86,10 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': 'portfolio_db',
-        'USER': 'admin',
-        'PASSWORD': '*******',
-        'HOST': '127.0.0.1',
-        'PORT': '5432'
+        'USER': 'postgres',
+        'PASSWORD': 'postgres',
+        'HOST': 'localhost',
+        'PORT': '5423'
     }
 }
 
@@ -130,7 +130,7 @@ USE_TZ = True
 
 STATIC_URL = 'static/'
 STATICFILES_DIRS = [
-    BASE_DIR / 'personal_portfolio/static',
+    BASE_DIR / 'portfolio/static_p',
 ]
 STATIC_ROOT = BASE_DIR / 'static'
 
@@ -151,13 +151,8 @@ INTERNAL_IPS = [
 
 EMAIL_HOST = 'smtp.mail.ru'
 EMAIL_PORT = 2525
-<<<<<<< HEAD
 EMAIL_HOST_USER = '*******'
 EMAIL_HOST_PASSWORD = '*******'
-=======
-EMAIL_HOST_USER = '******'
-EMAIL_HOST_PASSWORD = '******'
->>>>>>> 3720d481ed4f43cd5b028e18bf5d6683def29dc9
 EMAIL_USE_TLS = True
 EMAIL_USE_SSL = False
 
