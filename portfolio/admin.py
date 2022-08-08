@@ -3,7 +3,7 @@ from django.contrib import admin
 from django.utils.safestring import mark_safe
 from ckeditor_uploader.widgets import CKEditorUploadingWidget
 
-from .models import Projects, Category
+from portfolio.models import Projects, Category
 
 
 class ProjectsAdminForm(forms.ModelForm):

@@ -22,7 +22,7 @@ class HomeProjects(ListView):
         return context
 
     def get_queryset(self):
-        return Projects.objects.filter(is_published=True).select_related(
+        return Projects.objects.filter(is_published=False).select_related(
             'category')
 
 
